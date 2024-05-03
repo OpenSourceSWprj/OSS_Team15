@@ -1,11 +1,10 @@
 from openai import OpenAI
-import openai
-import os
 
-client = OpenAI(api_key = os.getenv("OPENAI_API_KEY"))
+OPENAI_API_KEY="api key 입력"
+client = OpenAI(api_key = OPENAI_API_KEY)
 
 history_message = [
-     {"role": "system", "content": "You are the best resume consultant professor"}
+     {"role": "system", "content": "You are the best resume consultant expert"}
 ]
 
 end_word = '종료'
