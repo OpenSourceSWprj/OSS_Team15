@@ -5,9 +5,9 @@ OPENAI_API_KEY="api key 입력"
 client = OpenAI(api_key = OPENAI_API_KEY)
   
 # gpt로 입력받은 텍스트를 임베딩
-def get_embedding(text, model="text-embedding-ada-002"):
+def get_embedding(text, model="text-embedding-3-small"):
    text = text.replace("\n", " ")
-   return openai.Embedding.create(input = [text], model=model)['data'][0]['embedding']
+   return client.embeddings.create(input = [text], model=model).data[0].embedding
 
 # flask로 입력받은 값을 저장하고 gpt가 출력한 값을 return하는 함수
 def get_response(question, keywords):
