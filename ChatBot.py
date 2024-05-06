@@ -17,7 +17,7 @@ def get_response(question, keywords):
          {"role": "system", "content": "You are the best resume consultant expert"}
     ]
 
-    user_question = "키워드" + "keywords" + "를 기반으로 자기소개서 질문 " + question + "에 적합한 대답을 해줘"
+    user_question = "키워드" + keywords + "를 기반으로 자기소개서 질문 " + question + "에 적합한 대답을 해줘"
 
     # 유저가 입력한 값을 리스트에 저장
     user_message.append({
