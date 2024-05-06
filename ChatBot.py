@@ -4,6 +4,11 @@ from openai import OpenAI
 OPENAI_API_KEY="api key 입력"
 client = OpenAI(api_key = OPENAI_API_KEY)
   
+# gpt로 입력받은 텍스트를 임베딩
+def get_embedding(text, model="text-embedding-ada-002"):
+   text = text.replace("\n", " ")
+   return openai.Embedding.create(input = [text], model=model)['data'][0]['embedding']
+
 # flask로 입력받은 값을 저장하고 gpt가 출력한 값을 return하는 함수
 def get_response(question, keywords):
 
@@ -18,6 +23,9 @@ def get_response(question, keywords):
     user_message.append({
         "role": "user",
         "content": user_question})
+    
+    # text embedding
+    vector_result = get_embedding(text=user_question)
 
     # gpt 응답을 저장하는 변수
     completion = client.chat.completions.create(
@@ -34,4 +42,3 @@ def get_response(question, keywords):
       "content": response})
 
     return response
-
