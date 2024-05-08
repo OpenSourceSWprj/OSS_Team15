@@ -50,7 +50,7 @@ with app.app_context():
         # database 연동 필요 get_embedding(crawled_text)-> url mapping
         embed = get_embedding(crawled_text)
         print(embed)
-        save_embedding(embed, url)
+        save_embedding(embed, url) ##
 
 
 
