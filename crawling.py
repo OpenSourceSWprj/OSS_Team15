@@ -6,7 +6,7 @@ from Temp import Crawlings
 from Temp import db
 from Temp import app
 ##
-OPENAI_API_KEY = "sk-proj-VvldGEMD4RuhGImfVEM2T3BlbkFJ2GnK87eyYguabtOmjziE"
+OPENAI_API_KEY = "api key"
 client = OpenAI(api_key=OPENAI_API_KEY)
 def get_embedding(text, model="text-embedding-3-small"):
     text = text.replace("\n", " ")
