@@ -1,13 +1,10 @@
 import json
 import requests
-from openai import OpenAI
 from bs4 import BeautifulSoup
 from Temp import Crawlings
 from Temp import db
+from Temp import client
 from Temp import app
-##
-OPENAI_API_KEY = "api key"
-client = OpenAI(api_key=OPENAI_API_KEY)
 def get_embedding(text, model="text-embedding-3-small"):
     text = text.replace("\n", " ")
     return client.embeddings.create(input=[text], model=model).data[0].embedding
@@ -40,8 +37,8 @@ def crawlurl(urlinput):
 
     # 텍스트 추출
     crawled_text = main_tag["props"]["pageProps"]["data"]["coverLetterWithHighlight"]["coverLetter"]["content"]
-    return crawled_text
-
+    return crawled_text[0:8192]
+#with app.app_context():
     for number in range(11743, 12744):    # 현재 11743 ~ 33002 까지의 자소서 존재 -> 요청 응답 없으면 건너뜀
         url = 'https://linkareer.com/cover-letter/%d?page=1&sort=PASSED_AT&tab=all' % number
 
