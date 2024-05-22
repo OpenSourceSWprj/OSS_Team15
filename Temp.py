@@ -9,8 +9,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'hello'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-OPENAI_API_KEY = "KEY"
-client = OpenAI(api_key=OPENAI_API_KEY)
+# OPENAI_API_KEY = "KEY"
+# client = OpenAI(api_key=OPENAI_API_KEY)
 # 데모에 필요한 최소한의 DB
 
 class UserInput(db.Model):
