@@ -1,64 +1,11 @@
-from flask import Flask, request
+from flask import request, jsonify
+from sqlalchemy import func
+from Temp import db, ChatbotResponse, UserInput, UserAnswer, app
+from ChatBot import get_response, get_refactoring
 
-from flask_sqlalchemy import SQLAlchemy
-from openai import OpenAI
-import json
-import numpy as np
-from numpy import dot
-from numpy.linalg import norm
-
-app = Flask(__name__)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\hojin.lee\\Desktop\\OSS_Team15-main\\OSS_Team15-main\\test.db'
-
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
-
-# 데모에 필요한 최소한의 DB
-
-class UserInput(db.Model):
-    __tablename__ = 'UserInput'
-    QuestionID = db.Column(db.Integer, primary_key=True)
-    question = db.Column(db.String(255), nullable=False)
-    keywords = db.Column(db.String(255), nullable=False)
-
-    def __repr__(self):
-        return f'<UserInput: {self.question}>'
-
-class Crawlings(db.Model):
-    __tablename__ = 'Crawling'
-    QuestionID = db.Column(db.Integer, primary_key=True)
-    QuestionVector = db.Column(db.Text, nullable=False)
-    URL = db.Column(db.String(255), nullable=False)
-
-    def __repr__(self):
-        return f'<Crawling: {self.URL}>'
-
-class Embedding(db.Model):
-    __tablename__ = 'Embedding'
-    QuestionID = db.Column(db.Integer, primary_key=True)
-    vector = db.Column(db.String(255), nullable=False)
-
-    def __repr__(self):
-        return f'<Embedding: {self.vector}>'
-
-class ChatbotResponse(db.Model):  # New table for storing chatbot responses
-    __tablename__ = 'ChatbotResponse'
-    ResponseID = db.Column(db.Integer, primary_key=True)
-    response = db.Column(db.String(255), nullable=False)
-
-    def __repr__(self):
-        return f'<ChatbotResponse: {self.response}>'
-
-with app.app_context():
-    db.create_all()
 # HTML form을 제공하는 루트 페이지
-
 @app.route('/', methods=['GET'])
-
 def index():
-
     return '''
         <!doctype html>
         <html>
@@ -66,114 +13,175 @@ def index():
             <title>자소서 친구</title>
         </head>
         <body>
-            <h1>자소서 항목,키워드</h1>
+            <h1>자소서 항목, 키워드</h1>
             <form action="/submit" method="post">
                 <p><input type="text" name="question" placeholder="자소서 항목"></p>
                 <p><textarea name="keywords" placeholder="keywords"></textarea></p>
                 <p><input type="submit" value="제출"></p>
             </form>
+            <div id="response-container"></div>
         </body>
         </html>
     '''
 
-# 폼 제출 처리
-
-@app.route('/submit', methods=['POST'])
-
-def submit():
-
-    question = request.form['question']
-
-    keywords = request.form['keywords']
-
-    entry = UserInput(question=question, keywords=keywords)
-
-    db.session.add(entry)
-
+def keywordsSave(response, question_id):
+    id = question_id
+    keywords = response.split('/')
+    keywordID = 1
+    for keyword in keywords:
+        entry = ChatbotResponse(keywordID=keywordID, QuestionID=id, response=keyword)
+        db.session.add(entry)
+        keywordID += 1
     db.session.commit()
 
-    # ChatBot 모듈의 함수에 질문과 키워드를 전달하여 응답을 받습니다.
+@app.route('/get_response/<int:question_id>/<int:keyword_id>', methods=['GET'])
+def get_next_response(question_id, keyword_id):
+    next_response = ChatbotResponse.query.filter_by(keywordID=keyword_id+1, QuestionID=question_id).first()
+    if next_response:
+        return jsonify({'response': next_response.response})
+    else:
+        return jsonify({'response': 'No more responses'})
+
+@app.route('/submit', methods=['POST'])
+def submit():
+    question = request.form['question']
+    keywords = request.form['keywords']
+    entry = UserInput(question=question, keywords=keywords)
+    db.session.add(entry)
+    db.session.commit()
+
     response = get_response(question, keywords)
+
+    if '/' not in response:  # '/'가 포함되지 않은 응답일 때
+        # 재 실행하는 코드
+        return submit()
+
+    max_question_id = db.session.query(func.max(ChatbotResponse.QuestionID)).scalar()
+    if max_question_id is None:
+        question_id = 1
+    else:
+        question_id = max_question_id + 1
+
+    keywordsSave(response, question_id)
+
+    response_html = ''
+    keywordID = 1
+    recommend = ChatbotResponse.query.filter_by(keywordID=keywordID, QuestionID=question_id).first()
+    if recommend:
+        response_html += f'<div id="keyword-{keywordID}">'
+        response_html += f'<p>{recommend.response}</p>'
+        response_html += '<div id="user-answer-container">'
+        response_html += '<input type="text" id="user-answer-input" placeholder="사용자 답변">'
+        response_html += '<button onclick="submitUserAnswer()">확인</button>'
+        response_html += '</div>'
+        response_html += '</div>'
+        keywordID += 1
+
+    next_button = '<button id="next-button" onclick="getNextResponse()">다음</button>'
+
 
     return f'''
         <!doctype html>
         <html>
         <head>
             <title>입력 결과</title>
+            <script>
+                let keywordId = 1;
+                const question_id = {question_id};
+
+                function getNextResponse() {{
+                    const currentKeyword = document.getElementById('keyword-' + keywordId);
+                    currentKeyword.style.display = 'none'; // 현재 키워드 숨기기
+                    keywordId++;
+                    fetch(`/get_response/${{question_id}}/${{keywordId}}`)
+                        .then(response => response.json())
+                        .then(data => {{
+                            const responseContainer = document.getElementById('response-container');
+                            responseContainer.innerHTML = ''; // Clear previous responses
+                            if (data.response !== 'No more responses') {{
+                                responseContainer.innerHTML += `<div id="keyword-${{keywordId}}">`;
+                                responseContainer.innerHTML += `<p>${{data.response}}</p>`;
+                                responseContainer.innerHTML += '<div id="user-answer-container">';
+                                responseContainer.innerHTML += '<input type="text" id="user-answer-input" placeholder="사용자 답변">';
+                                responseContainer.innerHTML += '<button onclick="submitUserAnswer()">확인</button>';
+                                responseContainer.innerHTML += '</div>';
+                                responseContainer.innerHTML += '</div>';
+                                // Show the next button
+                                document.getElementById('next-button').style.display = 'block';
+                            }} else {{
+                                responseContainer.innerHTML += '<p>No more responses</p>';
+                                document.getElementById('next-button').style.display = 'none'; // 다음 버튼 숨기기
+                                
+                                // 여기에 추가
+                                fetch(`/get_refactoring/{question}`)
+                                    .then(response => response.json())
+                                    .then(data => {{
+                                        const refactoring = data['refactoring']; // 서버에서 받은 JSON 데이터에서 refactoring 필드를 가져옴
+                                        const refactoringElement = document.createElement('p'); // 새로운 p 요소 생성
+                                        refactoringElement.textContent = refactoring; // p 요소에 refactoring 내용을 설정
+                                        responseContainer.appendChild(refactoringElement); // 화면에 p 요소 추가
+                                    }})
+                                    .catch(error => console.error('Error:', error));
+                                                        }}
+                                                    }})
+                        .catch(error => console.error('Error:', error));
+                }}
+                
+                function stripTags(html) {{
+                const doc = new DOMParser().parseFromString(html, 'text/html');
+                return doc.body.textContent || "";
+                }}
+
+                function submitUserAnswer() {{
+                    const userAnswer = document.getElementById('user-answer-input').value;
+                    const keywordHtml = document.getElementById('response-container').innerHTML;
+                    const keywordText = stripTags(keywordHtml); 
+                    fetch('/submit-answer', {{
+                        method: 'POST',
+                        headers: {{
+                            'Content-Type': 'application/json'
+                        }},
+                        body: JSON.stringify({{
+                            Question: '{question}',
+                            keyword: keywordText,
+                            user_answer: userAnswer
+                        }})
+                    }})
+                    .then(response => response.json())
+                    .then(data => {{
+                        console.log(data.message);
+                        getNextResponse();
+                    }})
+                    .catch(error => console.error('Error:', error));
+                }}
+            </script>
         </head>
         <body>
             <h1>제출된 텍스트</h1>
-            <p>항목 : { question }</p>
-            <p>키워드 : { keywords }</p>
+            <p>항목 : {question}</p>
+            <p>키워드 : {keywords}</p>
             <h1>ChatBot 응답</h1>
-            <p>{ response }</p>
+            <div id="response-container">
+                {response_html}
+            </div>
+            {next_button}
+            <script>
+                getNextResponse();
+            </script>
         </body>
         </html>
     '''
-OPENAI_API_KEY = "api key 입력"
-client = OpenAI(api_key=OPENAI_API_KEY)
-def cosine_similarity(A, B):
-    return dot(A, B)/(norm(A)*norm(B))
 
-
-
-# gpt로 입력받은 텍스트를 임베딩
-def get_embedding(text, model="text-embedding-3-small"):
-    text = text.replace("\n", " ")
-    return client.embeddings.create(input=[text], model=model).data[0].embedding
-
-def find_nearest(vector):
-    maxval = 0
-    indexval = 0
-    for number in range(1,53):
-        embedding = Crawlings.query.get(number)
-        #print(type(embedding.QuestionVector))
-        queryVec = json.loads(embedding.QuestionVector)
-        #print(type(queryVec))
-        temp = abs(cosine_similarity(queryVec,vector))
-        if(temp>maxval):
-            maxval = temp
-            indexval = number
-    return indexval
-
-# flask로 입력받은 값을 저장하고 gpt가 출력한 값을 return하는 함수
-def get_response(question, keywords):
-    # 앞으로 메세지들을 저장할 리스트
-    user_message = [
-        {"role": "system", "content": "You are the best resume consultant expert"}
-    ]
-
-    user_question = "키워드" + keywords + "를 기반으로 자기소개서 질문 " + question + "에 적합한 대답을 해줘"
-
-    # 유저가 입력한 값을 리스트에 저장
-    user_message.append({
-        "role": "user",
-        "content": user_question})
-
-    # text embedding
-    vector_result = get_embedding(text=user_question)
-
-    urlid = find_nearest(vector_result)
-
-    con = Crawlings.query.get(urlid)
-    print(con.URL)
-
-    # gpt 응답을 저장하는 변수
-    completion = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=user_message
-    )
-
-    # gpt 응답을 저장하는 변수
-    response = completion.choices[0].message.content
-
-    # gpt 응답을 리스트에 저장
-    user_message.append({
-        "role": "assistant",
-        "content": response})
-
-    return response
+@app.route('/submit-answer', methods=['POST'])
+def submit_answer():
+    data = request.json
+    question = data['Question']
+    user_answer = data['user_answer']
+    recommend_keyword = data['keyword']
+    entry = UserAnswer(Question=question, user_answer=user_answer, keyword=recommend_keyword)
+    db.session.add(entry)
+    db.session.commit()
+    return jsonify({'message': 'User answer submitted successfully'})
 
 if __name__ == '__main__':
     app.run(debug=True)
-
