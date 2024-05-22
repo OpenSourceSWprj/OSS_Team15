@@ -20,7 +20,7 @@ def get_embedding(text, model="text-embedding-3-small"):
 def find_nearest(vector):
     maxval = 0
     indexval = 0
-    for number in range(1,42):
+    for number in range(1,59):
         embedding = Crawlings.query.get(number)
         queryVec = json.loads(embedding.QuestionVector)
         temp = abs(cosine_similarity(queryVec,vector))
@@ -74,14 +74,11 @@ def get_refactoring(question):
 
     # 앞으로 메세지들을 저장할 리스트
     user_message = [
-        {"role": "system", "content": "You are the best resume consultant expert"}
+        {"role": "system", "content": "You are a job seeker writing a resume for the company you desperately want."}
     ]
 
-    user_question = "Please write a cover letter based on the keyword & response(" + str(keyword_responses) + ") provided for answering question(" + question + "). In Korean."
-    # gpt 응답을 리스트에 저장
-    user_message = [
-        {"role": "system", "content": "You are the best resume consultant expert"}
-    ]
+    user_question = "Thank you for supporting our company. Please answer the following questions - Q: " + question  + "(Here's the information we have about you: " + str(keyword_responses) + "). Please be sure to include information about yourself when answering the questions. Enclose your answers using your own information in curly brackets. Please be sure to answer in Korean. "
+
     user_message.append({
         "role": "user",
         "content": user_question})
