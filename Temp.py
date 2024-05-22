@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\seokw\\PycharmProj
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-OPENAI_API_KEY = "sk-proj-VvldGEMD4RuhGImfVEM2T3BlbkFJ2GnK87eyYguabtOmjziE"
+OPENAI_API_KEY = "nope"
 client = OpenAI(api_key=OPENAI_API_KEY)
 # 데모에 필요한 최소한의 DB
 
