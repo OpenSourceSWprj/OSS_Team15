@@ -1,5 +1,6 @@
 import json
 
+import openai
 from flask import jsonify
 from numpy import dot
 from numpy.linalg import norm
@@ -10,7 +11,11 @@ from Temp import Crawlings, app
 def cosine_similarity(A, B):
     return dot(A, B)/(norm(A)*norm(B))
 
-
+def moderate_text(text):
+    response = openai.Moderation.create(
+        input=text
+    )
+    return response["results"][0]
 
 # gpt로 입력받은 텍스트를 임베딩
 def get_embedding(text, model="text-embedding-3-small"):
@@ -20,7 +25,7 @@ def get_embedding(text, model="text-embedding-3-small"):
 def find_nearest(vector):
     maxval = 0
     indexval = 0
-    for number in range(1,59):
+    for number in range(1,38):
         embedding = Crawlings.query.get(number)
         queryVec = json.loads(embedding.QuestionVector)
         temp = abs(cosine_similarity(queryVec,vector))
@@ -45,7 +50,7 @@ def get_response(question, keywords):
     crawled_text = crawlurl(con.URL)
     print(con.URL)
 
-    user_question = "see the resume ["+crawled_text + ("] and extract keywords that are not present in the original keywords [") + keywords+"]. please answer in korean. Display them separated by '/'. Respond only with combinations of keywords and '/'."
+    user_question = "see the resume ["+crawled_text + ("] and extract various keywords that are not present in the original keywords [") + keywords+"]. please answer in korean. Display them separated by '/'. Respond only with combinations of keywords and '/'."
     # gpt 응답을 리스트에 저장
     user_message = [
         {"role": "system", "content": "You are the best resume consultant expert"}
@@ -65,9 +70,22 @@ def get_response(question, keywords):
     return response
 @app.route('/get_refactoring/<question>', methods=['GET'])
 def get_refactoring(question):
+    # Find the QuestionID for the given question
+    question_entry = UserAnswer.query.filter_by(Question=question).first()
+    if question_entry:
+        question_id = question_entry.QuestionID
+    else:
+        # Handle the case if the question doesn't exist
+        return jsonify({'error': 'Question not found'}), 404
+
     keyword_responses = []
 
-    answers = UserAnswer.query.filter_by(Question=question).all()
+    print(question_id)
+
+    # Filter UserAnswer entries based on the QuestionID
+    answers = UserAnswer.query.filter_by(QuestionID=question_id).all()
+
+    print(answers)
 
     for answer in answers:
         keyword_responses.append((answer.keyword, answer.user_answer))
@@ -77,7 +95,8 @@ def get_refactoring(question):
         {"role": "system", "content": "You are a job seeker writing a resume for the company you desperately want."}
     ]
 
-    user_question = "Thank you for supporting our company. Please answer the following questions - Q: " + question  + "(Here's the information we have about you: " + str(keyword_responses) + "). Please be sure to include information about yourself when answering the questions. Enclose your answers using your own information in curly brackets. Please be sure to answer in Korean. "
+    print(str(keyword_responses))
+    user_question = "Thank you for supporting our company. Please answer the following questions - Q: " + question  + "(Here's the information we have about you: " + str(keyword_responses) + "). Please be sure to include information about yourself when answering the questions. Give your best answer using all your information. Enclose your answers using your own information in curly brackets each given information. Please be sure to answer in Korean. "
 
     user_message.append({
         "role": "user",

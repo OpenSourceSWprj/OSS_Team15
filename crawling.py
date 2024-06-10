@@ -39,7 +39,7 @@ def crawlurl(urlinput):
     crawled_text = main_tag["props"]["pageProps"]["data"]["coverLetterWithHighlight"]["coverLetter"]["content"]
     return crawled_text[0:8192]
 #with app.app_context():
-    for number in range(11743, 12744):    # 현재 11743 ~ 33002 까지의 자소서 존재 -> 요청 응답 없으면 건너뜀
+    for number in range(11743, 11843):    # 현재 11743 ~ 33002 까지의 자소서 존재 -> 요청 응답 없으면 건너뜀
         url = 'https://linkareer.com/cover-letter/%d?page=1&sort=PASSED_AT&tab=all' % number
 
         crawled_text = crawlurl(url);

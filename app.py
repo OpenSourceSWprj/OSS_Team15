@@ -1,7 +1,7 @@
 from flask import request, jsonify
 from sqlalchemy import func
 from Temp import db, ChatbotResponse, UserInput, UserAnswer, app
-from ChatBot import get_response, get_refactoring
+from ChatBot import get_response, get_refactoring, moderate_text
 
 
 # HTML form을 제공하는 루트 페이지
@@ -144,7 +144,7 @@ def submit():
         response_html += f'<div id="keyword-{keywordID}">'
         response_html += f'<p>{recommend.response}</p>'
         response_html += '<div id="user-answer-container">'
-        response_html += '<input type="text" id="user-answer-input" placeholder="사용자 답변">'
+        response_html += '<textarea id="user-answer-input" placeholder="사용자 답변" style="height: 150px; width: 100%; font-size: 14px;"></textarea>'
         response_html += '<button onclick="submitUserAnswer()">확인</button>'
         response_html += '</div>'
         response_html += '</div>'
@@ -232,7 +232,7 @@ def submit():
                                 responseContainer.innerHTML = `<div id="keyword-${{keywordId}}">`;
                                 responseContainer.innerHTML += `<p>${{data.response}}</p>`;
                                 responseContainer.innerHTML += '<div id="user-answer-container">';
-                                responseContainer.innerHTML += '<input type="text" id="user-answer-input" placeholder="사용자 답변">';
+                                responseContainer.innerHTML += '<textarea id="user-answer-input" placeholder="사용자 답변" style="height: 150px; width: 100%; font-size: 14px;"></textarea>';
                                 responseContainer.innerHTML += '<button onclick="submitUserAnswer()">확인</button>';
                                 responseContainer.innerHTML += '</div>';
                                 responseContainer.innerHTML += '</div>';
@@ -240,7 +240,7 @@ def submit():
                             }} else {{
                                 responseContainer.innerHTML = '<p>질문에 대한 답변을 생성중입니다...</p>';
                                 document.getElementById('next-button').style.display = 'none';
-                                fetch(`/get_refactoring/${question}`)
+                                fetch(`/get_refactoring/{question}`)
                                     .then(response => response.json())
                                     .then(data => {{
                                         const refactoring = data['refactoring'];
@@ -267,6 +267,7 @@ def submit():
                         'Content-Type': 'application/json'
                     }},
                     body: JSON.stringify({{
+                        QuestionID: question_id,
                         Question: '{question}',
                         keyword: keywordText,
                         user_answer: userAnswer
@@ -300,10 +301,11 @@ def submit():
 @app.route('/submit-answer', methods=['POST'])
 def submit_answer():
     data = request.json
+    question_id = data['QuestionID']
     question = data['Question']
     user_answer = data['user_answer']
     recommend_keyword = data['keyword']
-    entry = UserAnswer(Question=question, user_answer=user_answer, keyword=recommend_keyword)
+    entry = UserAnswer(QuestionID=question_id, Question=question, user_answer=user_answer, keyword=recommend_keyword)
     db.session.add(entry)
     db.session.commit()
     return jsonify({'message': 'User answer submitted successfully'})
