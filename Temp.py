@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from openai import OpenAI
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\seokw\\PycharmProjects\\OS_Project\\OSS_Team15\\test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\chrtf\\Desktop\\oss\\test6.db'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 

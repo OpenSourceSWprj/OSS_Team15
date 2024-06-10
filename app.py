@@ -1,7 +1,7 @@
-from flask import request, jsonify
+from flask import request, jsonify,render_template,redirect, url_for
 from sqlalchemy import func
 from Temp import db, ChatbotResponse, UserInput, UserAnswer, app
-from ChatBot import get_response, get_refactoring, moderate_text
+from ChatBot import get_response, get_refactoring, check_moderation,translate_text
 
 
 # HTML form을 제공하는 루트 페이지
@@ -114,6 +114,9 @@ def get_next_response(question_id, keyword_id):
     else:
         return jsonify({'response': '질문에 대한 답변을 생성중입니다...'})
 
+@app.route('/moderation')
+def moderation():
+    return render_template('moderation.html')
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -124,6 +127,22 @@ def submit():
     db.session.commit()
 
     response = get_response(question, keywords)
+
+
+
+    questionText = translate_text(question)
+    keywordsText = translate_text(keywords)
+        
+    # 최후의수단임
+    moderationQuestionText = check_moderation(questionText)
+    moderationKeywordsText = check_moderation(keywordsText)
+
+    if moderationQuestionText or moderationKeywordsText:
+        if moderationQuestionText:
+            return render_template('moderation.html')
+        else:
+            return render_template('moderation.html')
+        
 
     if '/' not in response:  # '/'가 포함되지 않은 응답일 때
         # 재 실행하는 코드

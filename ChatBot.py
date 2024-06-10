@@ -1,6 +1,6 @@
 import json
 
-import openai
+from openai import OpenAI
 from flask import jsonify
 from numpy import dot
 from numpy.linalg import norm
@@ -11,11 +11,7 @@ from Temp import Crawlings, app
 def cosine_similarity(A, B):
     return dot(A, B)/(norm(A)*norm(B))
 
-def moderate_text(text):
-    response = openai.Moderation.create(
-        input=text
-    )
-    return response["results"][0]
+
 
 # gpt로 입력받은 텍스트를 임베딩
 def get_embedding(text, model="text-embedding-3-small"):
@@ -25,7 +21,7 @@ def get_embedding(text, model="text-embedding-3-small"):
 def find_nearest(vector):
     maxval = 0
     indexval = 0
-    for number in range(1,38):
+    for number in range(1,57):
         embedding = Crawlings.query.get(number)
         queryVec = json.loads(embedding.QuestionVector)
         temp = abs(cosine_similarity(queryVec,vector))
@@ -67,7 +63,54 @@ def get_response(question, keywords):
 
     response = completion.choices[0].message.content
 
+
+
+    
+
     return response
+
+
+def check_moderation(text):
+    """
+    주어진 텍스트가 OpenAI의 Moderation API에서 부적절한지 여부를 체크하는 함수.
+
+    Args:
+    text (str): 검사할 텍스트
+    
+
+    Returns:
+    bool: 텍스트가 부적절하면 True, 그렇지 않으면 False
+    """
+
+    
+    response = client.moderations.create(input=text)
+
+    output = response.results[0]
+
+
+    if output:
+        return True
+
+
+def translate_text(text):
+    # GPT-4 모델에게 번역 요청을 보냅니다
+    
+    completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content":f"Translate the following text to korean: {text}"}
+        ]
+    )
+
+
+    response = completion.choices[0].message.content
+
+
+    return response
+
+
+
+
 @app.route('/get_refactoring/<question>', methods=['GET'])
 def get_refactoring(question):
     # Find the QuestionID for the given question
