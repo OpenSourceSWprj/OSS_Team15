@@ -1,8 +1,8 @@
 # <h1>🧑‍🏫 Interviewer Mr. G</h1>
 
-# Central University 2024 Spring Semester Open Source Software Project Term Project
+# Chung Ang University 2024 Spring Semester Open Source Software Project Term Project
 
-Team 15 **<span style="color: blue;">HanJeongHongLee</span>** **<span style="color: green;">Interviewer G Project</span>**  
+Team : **HanJeongHongLee** **Interviewer Mr. G Project**
 
 
 # 자기소개서 작성 도우미
