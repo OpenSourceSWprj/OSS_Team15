@@ -36,20 +36,16 @@ Team : **HanJeongHongLee**
 
 
 ## ℹ️ [Project Overview](#project-overview)  
-
-  
+<br>
 
 ## 🔑 [Usage Scenarios](#usage-scenarios)  
-
-
+<br>
 
 ## 🤝 [Contribution Highlights](#contribution-highlights)  
-
-
+<br>
 
 ## 📜 [License](#license)  
-
-
+<br>
 
 ## 👥 [Contributors](#contributors)  
 
