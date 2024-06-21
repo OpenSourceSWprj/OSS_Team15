@@ -35,3 +35,8 @@
 - **합격 자기소개서 크롤링**: 합격 자기소개서를 모아놓은 사이트를 크롤링하여, GPT가 작성한 내용과 유사도를 비교 후 출력합니다.
 - **키워드 추천**: 높은 유사도를 가진 합격 자소서 문장의 텍스트를 추출하여 사용자가 떠올리지 못한 키워드를 추가로 추천합니다.
 - **시각적 확인**: 사용자가 입력한 키워드의 내용은 GPT가 출력하는 중괄호 안에 반영되어 있음을 시각적으로 확인할 수 있습니다.
+
+## 🧑‍🤝‍🧑Contributors
+| [![텍스트](/Issue-Station-Web/public/assets/Park.png)](https://github.com/sanghuniolsida) | [![텍스트](/Issue-Station-Web/public/assets/Lee.png)](https://github.com/PROMLEE) | [![텍스트](/Issue-Station-Web/public/assets/Han.png)](https://github.com/Easthee)| [![텍스트](/Issue-Station-Web/public/assets/Min.png)](https://github.com/wook)  | [![텍스트](/Issue-Station-Web/public/assets/Jeoun.png)](https://github.com/jeoneunjin) |
+|:---:|:---:|:---:|:---:|:---:|
+| 한동희 | 정구홍 | 홍석우 | 이호진 |
