@@ -21,22 +21,23 @@
 ## 목차
 
 
-ℹ️ 프로젝트 소개  
+
+ℹ️ Project Overview
 
 
-🔑 사용 시나리오
+🔑 Usage Scenarios
 
 
-🤝 기여
+🤝 Contribution Highlights
 
 
-📜 라이선스 
+📜 License
 
 
 👥 Contributors
 
 
-## 프로젝트 소개
+## ℹ️ Project Overview  
 
 
 이 프로젝트는 다음과 같은 문제를 해결하고자 합니다:
@@ -51,7 +52,8 @@
 - **키워드 추천**: 높은 유사도를 가진 합격 자소서 문장의 텍스트를 추출하여 사용자가 떠올리지 못한 키워드를 추가로 추천합니다.
 - **시각적 확인**: 사용자가 입력한 키워드의 내용은 GPT가 출력하는 중괄호 안에 반영되어 있음을 시각적으로 확인할 수 있습니다.
 
-## 🤝 기여  
+  
+## 🤝 Contribution Highlights
 
   
 ### 1. 크롤링 및 데이터 수집
