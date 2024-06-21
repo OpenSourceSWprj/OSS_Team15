@@ -1,8 +1,8 @@
 # <h1>🧑‍🏫 Interviewer Mr. G</h1>
 
-# Chung Ang University 2024 Spring Semester          Open Source Software Term Project  
+# Chung Ang University 2024 Spring Semester Open Source Software Project  
 
-Team : **HanJeongHongLee** **Interviewer Mr. G Project**
+Team : **HanJeongHongLee** **Interviewer Mr. G Project**  
 
 
 # 자기소개서 작성 도우미
