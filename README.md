@@ -1,4 +1,4 @@
-# <h1>🧑‍🏫 면접관 G씨</h1>
+# <h1>🧑‍🏫 Interviewer Mr. G</h1>
 
 # Central University 2024 Spring Semester Open Source Software Project Term Project
 
