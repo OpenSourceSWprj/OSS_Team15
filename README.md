@@ -45,6 +45,9 @@ Team : **HanJeongHongLee**
 ## 👥 [Contributors](#contributors)  
 
 
+## 🔑 Usage Scenarios  
+<img width="1106" alt="image" src="https://github.com/OpenSourceSWprj/OSS_Team15/assets/132530028/19189250-4f2a-405e-8619-a6fc1e57d20d">
+
 
 
 ## ℹ️ Project Overview  
