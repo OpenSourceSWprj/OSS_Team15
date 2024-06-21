@@ -79,22 +79,18 @@ Team : **HanJeongHongLee**
 <a name="usage-scenarios"></a>
 
 ## 🔑 Usage Scenarios  
-<img width="1106" alt="image" src="https://github.com/OpenSourceSWprj/OSS_Team15/assets/132530028/19189250-4f2a-405e-8619-a6fc1e57d20d">
-
-![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/ecbc0d96-d428-461d-8354-f77ccd7f47e7)
-STEP 1. 자기소개서의 질문 하나와 해당 질문에 대해 쓰고 싶은 키워드를 입력하고 제출합니다.
-
-
 
 # Interviewer Mr. G 페이지 접속
 <br>
 
-![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/d2a18e67-8eb3-47ab-9d28-cd6595ba6ead)
+<img width="1106" alt="image" src="https://github.com/OpenSourceSWprj/OSS_Team15/assets/132530028/19189250-4f2a-405e-8619-a6fc1e57d20d">
+
 
 # Keyword & Statement 입력
 <br>
+![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/ecbc0d96-d428-461d-8354-f77ccd7f47e7)
+STEP 1. 자기소개서의 질문 하나와 해당 질문에 대해 쓰고 싶은 키워드를 입력하고 제출합니다.
 
-![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/83544a96-8957-4226-a442-6c97838595c1)
 Step 2. 사용자가 입력한 키워드 및 추가된 키워드에 대해 보충하고 싶은 내용을 작성합니다.
 
 만약, 답변을 작성하기 힘든 경우 다음 버튼을 통해 넘어갈 수 있습니다.
@@ -116,7 +112,6 @@ STEP 4. 자기소개서 질문과 키워드에 부적절한 입력 감지 시 �
 
 ![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/51eb4080-7f07-4768-ad8f-a69591e2fc02)
 
-![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/320bed88-0aff-4827-a4ce-d4d065aaa63d)
 
 <br>
 <br>
