@@ -88,7 +88,8 @@ Team : **HanJeongHongLee**
 <br>
 
 
-<a name="project-overview"></a>
+<a name="contribution-highlights"></a>
+
 ## 🤝 Contribution Highlights
 
   
@@ -123,7 +124,9 @@ Team : **HanJeongHongLee**
 <br>
 <br>
 <br>
-  
+
+<a name="license"></a>
+
 ## 📜 License
 This project is licensed under the terms of the Creative Commons Attribution-NonCommercial 4.0 International License.
 This license allows for non-commercial use only and requires attribution to the original authors.
@@ -132,6 +135,8 @@ This license allows for non-commercial use only and requires attribution to the 
 <br>
 <br>
 <br>
+
+<a name="contributors"></a>
 
 ## 👥Contributors
 | [![텍스트](/Profile/Han.png)](https://github.com/easthee) | [![텍스트](/Profile/Jeong.png)](https://github.com/9hon9) | [![텍스트](/Profile/Hong.png)](https://github.com/StoneCAU)| [![텍스트](/Profile/Lee.png)](https://github.com/woohoosupernewuser1)  |
