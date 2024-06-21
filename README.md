@@ -81,6 +81,30 @@ Team : **HanJeongHongLee**
 ## 🔑 Usage Scenarios  
 <img width="1106" alt="image" src="https://github.com/OpenSourceSWprj/OSS_Team15/assets/132530028/19189250-4f2a-405e-8619-a6fc1e57d20d">
 
+![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/ecbc0d96-d428-461d-8354-f77ccd7f47e7)
+STEP 1. 자기소개서의 질문 하나와 해당 질문에 대해 쓰고 싶은 키워드를 입력하고 제출합니다.
+
+
+
+
+![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/d2a18e67-8eb3-47ab-9d28-cd6595ba6ead)
+
+![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/83544a96-8957-4226-a442-6c97838595c1)
+Step 2. 사용자가 입력한 키워드 및 추가된 키워드에 대해 보충하고 싶은 내용을 작성합니다.
+
+만약, 답변을 작성하기 힘든 경우 다음 버튼을 통해 넘어갈 수 있습니다.
+![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/6ddd2885-b83d-4d78-afa2-e616b12f46cd)
+STEP 3. 사용자가 입력한 답변을 기반으로 크롤링한 합격 자소서와 비교하여 GPT가 문장을 생성합니다.
+![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/768b7d90-12d2-4b3b-8ed4-3cbc72bd45b4)
+
+![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/e92322be-ecda-45fa-8ac2-0af2697ba993)
+STEP 4. 자기소개서 질문과 키워드에 부적절한 입력 감지 시 경고 창이 출력됩니다.
+
+![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/c02e7908-569e-47a4-99a6-d75c02cf4fdc)
+
+![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/51eb4080-7f07-4768-ad8f-a69591e2fc02)
+
+![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/320bed88-0aff-4827-a4ce-d4d065aaa63d)
 
 <br>
 <br>
