@@ -1,2 +1,34 @@
-# OSS_TeamCauboy
- Youngjun Yoo OpenSource SW Project ..
+# 자기소개서 작성 도우미
+
+프로젝트 설명: 이 프로젝트는 자기소개서 작성에 어려움을 겪는 사람들을 위해 GPT를 활용하여 자기소개서의 초안을 작성하고, 기존 합격 자기소개서와 비교하여 개선된 문장을 제안하는 도우미입니다.
+
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
+## 목차
+- [프로젝트 소개](#프로젝트-소개)
+- [설치](#설치)
+- [사용법](#사용법)
+- [기여](#기여)
+- [라이선스](#라이선스)
+
+## 프로젝트 소개
+
+이 프로젝트는 다음과 같은 문제를 해결하고자 합니다:
+1. **기본적인 구조와 흐름을 잡기 어려움**: 처음 자기소개서를 작성할 때 막막함을 느끼는 경우.
+2. **시간 소요**: 글을 쓰는 데 시간이 많이 걸림.
+3. **자신의 특징을 글에 녹이기 어려움**: 자신의 특징을 객관적으로 파악하고 글로 풀어내기 어려움.
+
+프로젝트의 주요 기능:
+- GPT를 활용하여 자기소개서의 대략적인 구조와 흐름을 작성.
+- 합격 자기소개서를 크롤링하여 GPT가 생성한 문장과 유사도를 비교하고 추천 키워드를 제시.
+- 사용자의 입력 키워드를 반영하여 시각적으로 확인 가능.
+
+## 설치
+
+프로젝트를 설치하려면 다음 명령어를 사용하세요:
+
+```bash
+git clone https://github.com/yourusername/yourproject.git
+cd yourproject
+npm install
