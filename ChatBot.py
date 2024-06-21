@@ -12,7 +12,6 @@ def cosine_similarity(A, B):
     return dot(A, B)/(norm(A)*norm(B))
 
 
-
 # gpt로 입력받은 텍스트를 임베딩
 def get_embedding(text, model="text-embedding-3-small"):
     text = text.replace("\n", " ")
@@ -56,7 +55,7 @@ def get_response(question, keywords):
         "content": user_question})
 
     completion = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4-turbo",
         messages=user_message
     )
 
@@ -65,48 +64,48 @@ def get_response(question, keywords):
 
 
 
-    
-
     return response
 
 
-def check_moderation(text):
-    """
-    주어진 텍스트가 OpenAI의 Moderation API에서 부적절한지 여부를 체크하는 함수.
-
-    Args:
-    text (str): 검사할 텍스트
+def custom_moderation(content, parameters):
+    # Define the prompt for GPT-4
+    prompt = f"""Please assess the following content for any inappropriate material. You should base your assessment on the given parameters.
+    Your answer should be in json format with the following fields: 
+        - flagged: a boolean indicating whether the content is flagged for any of the categories in the parameters
+        - reason: a string explaining the reason for the flag, if any
+        - parameters: a dictionary of the parameters used for the assessment and their values
+    Parameters: {parameters}\n\nContent:\n{content}\n\nAssessment:"""
     
-
-    Returns:
-    bool: 텍스트가 부적절하면 True, 그렇지 않으면 False
-    """
-
-    
-    response = client.moderations.create(input=text)
-
-    output = response.results[0]
-
-
-    if output:
-        return True
-
-
-def translate_text(text):
-    # GPT-4 모델에게 번역 요청을 보냅니다
-    
-    completion = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+    # Call GPT-4 with the prompt
+    response = client.chat.completions.create(
+        model="gpt-4-turbo-preview",
+        response_format={ "type": "json_object" },
         messages=[
-            {"role": "system", "content":f"Translate the following text to korean: {text}"}
+            {"role": "system", "content": "You are a content moderation assistant."},
+            {"role": "user", "content": prompt}
         ]
     )
+    
+    # Extract the assessment from the response
+    assessment = response.choices[0].message.content
+
+    print(assessment)
+    
+    # Parse the JSON response
+    assessment_dict = json.loads(assessment)
+    
+    # Extract the "flagged" value
+    flagged = assessment_dict.get("flagged", False)
+    
+    return flagged
 
 
-    response = completion.choices[0].message.content
 
 
-    return response
+
+
+
+
 
 
 
@@ -146,7 +145,7 @@ def get_refactoring(question):
         "content": user_question})
 
     completion = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4-turbo",
         messages=user_message
     )
 

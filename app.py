@@ -1,8 +1,7 @@
 from flask import request, jsonify,render_template,redirect, url_for
 from sqlalchemy import func
 from Temp import db, ChatbotResponse, UserInput, UserAnswer, app
-from ChatBot import get_response, get_refactoring, check_moderation,translate_text
-
+from ChatBot import get_response, get_refactoring,custom_moderation
 
 # HTML form을 제공하는 루트 페이지
 @app.route('/', methods=['GET'])
@@ -93,8 +92,6 @@ def index():
     </body>
     </html>
         '''
-
-
 def keywordsSave(response, question_id):
     id = question_id
     keywords = response.split('/')
@@ -118,6 +115,8 @@ def get_next_response(question_id, keyword_id):
 def moderation():
     return render_template('moderation.html')
 
+
+
 @app.route('/submit', methods=['POST'])
 def submit():
     question = request.form['question']
@@ -126,23 +125,22 @@ def submit():
     db.session.add(entry)
     db.session.commit()
 
+    parameters = {"profanity", "violence", "hate_speech", "harassment/threatening", "self-harm/instructions",
+                  "self-harm/intent", "self-harm"}
+    
+
     response = get_response(question, keywords)
 
+    tempmessage = question + keywords
+
+    moder = custom_moderation(tempmessage, parameters)
 
 
-    questionText = translate_text(question)
-    keywordsText = translate_text(keywords)
-        
-    # 최후의수단임
-    moderationQuestionText = check_moderation(questionText)
-    moderationKeywordsText = check_moderation(keywordsText)
+    if moder:
+        return render_template('moderation.html')
 
-    if moderationQuestionText or moderationKeywordsText:
-        if moderationQuestionText:
-            return render_template('moderation.html')
-        else:
-            return render_template('moderation.html')
-        
+
+
 
     if '/' not in response:  # '/'가 포함되지 않은 응답일 때
         # 재 실행하는 코드
