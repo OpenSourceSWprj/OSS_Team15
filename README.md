@@ -18,8 +18,6 @@
 ## 목차
 ℹ️ 프로젝트 소개  
 
-📝 사용법
-
 🔑 사용 시나리오
 
 🤝 기여
@@ -41,7 +39,12 @@
 - **키워드 추천**: 높은 유사도를 가진 합격 자소서 문장의 텍스트를 추출하여 사용자가 떠올리지 못한 키워드를 추가로 추천합니다.
 - **시각적 확인**: 사용자가 입력한 키워드의 내용은 GPT가 출력하는 중괄호 안에 반영되어 있음을 시각적으로 확인할 수 있습니다.
 
-## 🧑‍🤝‍🧑Contributors
+📜 License
+This project is licensed under the terms of the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).  
+This license allows for non-commercial use only and requires attribution to the original authors.
+
+
+## 👥Contributors
 | [![텍스트](/Profile/Han.png)](https://github.com/easthee) | [![텍스트](/Profile/Jeong.png)](https://github.com/9hon9) | [![텍스트](/Profile/Hong.png)](https://github.com/StoneCAU)| [![텍스트](/Profile/Lee.png)](https://github.com/woohoosupernewuser1)  |
 |:---:|:---:|:---:|:---:|
 | 한동희 | 정구홍 | 홍석우 | 이호진 |
