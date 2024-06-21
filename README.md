@@ -4,6 +4,8 @@
 Chung Ang University 2024 Spring Semester Open Source Software Project  
 
 Team : **HanJeongHongLee**
+
+<br>
 <br>
 
 # 자기소개서 작성 도우미
