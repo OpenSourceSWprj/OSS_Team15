@@ -34,7 +34,6 @@ Team : **HanJeongHongLee**
 # 목차
 
 
-<a name="project-overview"></a>
 ## ℹ️ [Project Overview](#project-overview)  
 <br>
 
@@ -54,16 +53,10 @@ Team : **HanJeongHongLee**
 <br>
 <br>
 
-## 🔑 Usage Scenarios  
-<img width="1106" alt="image" src="https://github.com/OpenSourceSWprj/OSS_Team15/assets/132530028/19189250-4f2a-405e-8619-a6fc1e57d20d">
 
+<a name="project-overview"></a>
 
-<br>
-<br>
-<br>
-<br>
-
-## ℹ️ Project Overview  
+## ℹ️ Project Overview
 
 
 이 프로젝트는 다음과 같은 문제를 해결하고자 합니다:
@@ -83,6 +76,19 @@ Team : **HanJeongHongLee**
 <br>
 <br>
 
+<a name="usage-scenarios"></a>
+
+## 🔑 Usage Scenarios  
+<img width="1106" alt="image" src="https://github.com/OpenSourceSWprj/OSS_Team15/assets/132530028/19189250-4f2a-405e-8619-a6fc1e57d20d">
+
+
+<br>
+<br>
+<br>
+<br>
+
+
+<a name="project-overview"></a>
 ## 🤝 Contribution Highlights
 
   
