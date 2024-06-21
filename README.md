@@ -1,4 +1,4 @@
-# <h1>🧑‍🏫 Interviewer Mr. G</h1>
+# <h1>🧑‍🏫 Interviewer Mr. G
 <br>
 
 Chung Ang University 2024 Spring Semester Open Source Software Project  
