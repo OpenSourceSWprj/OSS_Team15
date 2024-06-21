@@ -13,7 +13,7 @@ Team : **HanJeongHongLee**
 <br>
 <br>
 
-# <a href="https://github.com/OpenSourceSWprj/OSS_Team15" target="_blank">Github Ropository</a>
+# <a href="https://github.com/OpenSourceSWprj/OSS_Team15" target="_blank">Github Repository</a>
 
 <br>
 <br>
