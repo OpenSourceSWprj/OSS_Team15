@@ -37,6 +37,6 @@
 - **시각적 확인**: 사용자가 입력한 키워드의 내용은 GPT가 출력하는 중괄호 안에 반영되어 있음을 시각적으로 확인할 수 있습니다.
 
 ## 🧑‍🤝‍🧑Contributors
-| [![텍스트](/Profile/Han.png)](https://github.com/easthee) | [![텍스트](/Profile/Jeong.png)](https://github.com/9hon9) | [![텍스트](/Profile/Hong.png)](https://github.com/StoneCAU)| [![텍스트](/Profile/Lee.png)](https://github.com/woohoosupernewuser1)  |
+| [![텍스트](/Han.png)](https://github.com/easthee) | [![텍스트](/Issue-Station-Web/public/assets/Lee.png)](https://github.com/9hon9) | [![텍스트](/Issue-Station-Web/public/assets/Han.png)](https://github.com/StoneCAU)| [![텍스트](/Issue-Station-Web/public/assets/Min.png)](https://github.com/woohoosupernewuser1)  |
 |:---:|:---:|:---:|:---:|
 | 한동희 | 정구홍 | 홍석우 | 이호진 |
