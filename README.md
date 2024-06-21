@@ -52,7 +52,7 @@
 - **시각적 확인**: 사용자가 입력한 키워드의 내용은 GPT가 출력하는 중괄호 안에 반영되어 있음을 시각적으로 확인할 수 있습니다.
 
 
-📜 License
+## 📜 License
 This project is licensed under the terms of the Creative Commons Attribution-NonCommercial 4.0 International License.
 This license allows for non-commercial use only and requires attribution to the original authors.
 
