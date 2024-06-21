@@ -3,7 +3,10 @@
 
 Chung Ang University 2024 Spring Semester Open Source Software Project  
 
-Team : **HanJeongHongLee**
+Team : **HanJeongHongLee**  
+
+# <a href="https://www.youtube.com/watch?v=6JUicG0729g&t=4210s" target="_blank">YouTube Video</a>
+
 
 <br>
 <br>
