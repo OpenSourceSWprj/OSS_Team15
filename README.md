@@ -86,6 +86,8 @@ Team : **HanJeongHongLee**
 
 <img width="1106" alt="image" src="https://github.com/OpenSourceSWprj/OSS_Team15/assets/132530028/19189250-4f2a-405e-8619-a6fc1e57d20d">
 
+<br>
+<br>
 
 # Keyword & Statement 입력
 <br>
@@ -96,12 +98,18 @@ STEP 1. 자기소개서의 질문 하나와 해당 질문에 대해 쓰고 싶�
 Step 2. 사용자가 입력한 키워드 및 추가된 키워드에 대해 보충하고 싶은 내용을 작성합니다.  
 만약, 답변을 작성하기 힘든 경우 다음 버튼을 통해 넘어갈 수 있습니다.  
 
+<br>
+<br>
+
 # New Keyword 사용자 답변 입력
 <br>
 <br>
 
 ![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/6ddd2885-b83d-4d78-afa2-e616b12f46cd)
 STEP 3. 사용자가 입력한 답변을 기반으로 크롤링한 합격 자소서와 비교하여 GPT가 문장을 생성합니다.
+
+<br>
+<br>
 
 # Interviewer Mr. G 답변 생성
 <br>
@@ -110,6 +118,9 @@ STEP 3. 사용자가 입력한 답변을 기반으로 크롤링한 합격 자소
 ![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/e92322be-ecda-45fa-8ac2-0af2697ba993)
 STEP 4. 자기소개서 질문과 키워드에 부적절한 입력 감지 시 경고 창이 출력됩니다.
 
+# Moderation Detect
+<br>
+<br>
 
 ![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/c02e7908-569e-47a4-99a6-d75c02cf4fdc)
 
