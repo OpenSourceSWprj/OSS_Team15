@@ -1,6 +1,6 @@
 # <h1>🧑‍🏫 Interviewer Mr. G</h1>
 
-# Chung Ang University 2024 Spring Semester Open Source Software Project  
+Chung Ang University 2024 Spring Semester Open Source Software Project  
 
 Team : **HanJeongHongLee** **Interviewer Mr. G Project**  
 
