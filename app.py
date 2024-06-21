@@ -235,6 +235,8 @@ def submit():
             let keywordId = 1;
             const question_id = {question_id};
 
+
+
             function getNextResponse() {{
                 const currentKeyword = document.getElementById('keyword-' + keywordId);
                 if (currentKeyword) {{
@@ -266,9 +268,15 @@ def submit():
                                         responseContainer.innerHTML = '<h1>=====================================<br>면접관 G씨의 답변 입니다.</h1>';
                                         responseContainer.appendChild(refactoringElement);
                                         
+                                        const backButton = document.createElement('button');
+                                        backButton.textContent = '돌아가기';
+                                        backButton.setAttribute('onclick', 'back()');
+                                        responseContainer.appendChild(backButton);
                                     }})
                                     .catch(error => console.error('Error:', error));
+                                    
                             }}
+                            
                         }})
                         .catch(error => console.error('Error:', error));
                 }}
@@ -296,7 +304,11 @@ def submit():
                     getNextResponse();
                 }})
                 .catch(error => console.error('Error:', error));
+            
             }}
+            function back() {{
+            window.location.href = '/';
+        }}
         </script>
     </head>
     <body>
