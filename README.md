@@ -116,7 +116,10 @@ STEP 3. 사용자가 입력한 답변을 기반으로 크롤링한 합격 자소
 <br>
 
 ![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/e92322be-ecda-45fa-8ac2-0af2697ba993)
-STEP 4. 자기소개서 질문과 키워드에 부적절한 입력 감지 시 경고 창이 출력됩니다.
+STEP 4. 자기소개서 질문과 키워드에 부적절한 입력 감지 시 경고 창이 출력됩니다.  
+
+<br>
+<br>
 
 # Moderation Detect
 <br>
@@ -126,7 +129,7 @@ STEP 4. 자기소개서 질문과 키워드에 부적절한 입력 감지 시 �
 
 ![image](https://github.com/OpenSourceSWprj/OSS_Team15/assets/164728750/51eb4080-7f07-4768-ad8f-a69591e2fc02)
 
-
+<br>
 <br>
 <br>
 <br>
